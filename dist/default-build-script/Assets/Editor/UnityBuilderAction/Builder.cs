@@ -82,7 +82,7 @@ namespace UnityBuilderAction
         throw new Exception("Build profiles are not supported by this version of Unity (" + Application.unityVersion +")");
 #endif // UNITY_6000_0_OR_NEWER
 
-        buildTarget = buildProfile.buildTarget;
+        buildTarget = buildProfile.GetBuildTarget();
       } else {
 
 #if BUILD_PROFILE_LOADED
