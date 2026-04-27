@@ -52,7 +52,7 @@ namespace UnityBuilderAction
         }
       }
 
-      BuildTarget buildTarget = (BuildTarget) Enum.Parse(typeof(BuildTarget), options["buildTarget"]);
+      BuildTarget buildTarget;
 
       // Depending on whether the build is using a build profile, `buildPlayerOptions` will an instance
       // of either `UnityEditor.BuildPlayerOptions` or `UnityEditor.BuildPlayerWithProfileOptions`
@@ -82,6 +82,7 @@ namespace UnityBuilderAction
         throw new Exception("Build profiles are not supported by this version of Unity (" + Application.unityVersion +")");
 #endif // UNITY_6000_0_OR_NEWER
 
+        buildTarget = buildProfile.buildTarget;
       } else {
 
 #if BUILD_PROFILE_LOADED
@@ -110,6 +111,7 @@ namespace UnityBuilderAction
 #endif
         };
 
+        buildTarget = (BuildTarget) Enum.Parse(typeof(BuildTarget), options["buildTarget"]);
       }
 
      // Apply Android settings
