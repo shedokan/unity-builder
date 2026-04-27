@@ -52,6 +52,8 @@ namespace UnityBuilderAction
         }
       }
 
+      BuildTarget buildTarget = (BuildTarget) Enum.Parse(typeof(BuildTarget), options["buildTarget"]);
+
       // Depending on whether the build is using a build profile, `buildPlayerOptions` will an instance
       // of either `UnityEditor.BuildPlayerOptions` or `UnityEditor.BuildPlayerWithProfileOptions`
       dynamic buildPlayerOptions;
@@ -97,8 +99,6 @@ namespace UnityBuilderAction
         }
 #endif
 
-        BuildTarget buildTarget = (BuildTarget) Enum.Parse(typeof(BuildTarget), options["buildTarget"]);
-
         // Define BuildPlayerOptions
         buildPlayerOptions = new BuildPlayerOptions {
           scenes = scenes,
@@ -110,13 +110,13 @@ namespace UnityBuilderAction
 #endif
         };
 
-        // Apply Android settings
-        if (buildTarget == BuildTarget.Android) {
-          VersionApplicator.SetAndroidVersionCode(options["androidVersionCode"]);
-          AndroidSettings.Apply(options);
-        }
-
       }
+
+     // Apply Android settings
+     if (buildTarget == BuildTarget.Android) {
+       VersionApplicator.SetAndroidVersionCode(options["androidVersionCode"]);
+       AndroidSettings.Apply(options);
+     }
 
       // Perform build
       BuildReport buildReport = BuildPipeline.BuildPlayer(buildPlayerOptions);
