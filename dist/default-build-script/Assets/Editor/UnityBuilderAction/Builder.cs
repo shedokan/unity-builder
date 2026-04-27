@@ -100,6 +100,8 @@ namespace UnityBuilderAction
         }
 #endif
 
+        buildTarget = (BuildTarget) Enum.Parse(typeof(BuildTarget), options["buildTarget"]);
+
         // Define BuildPlayerOptions
         buildPlayerOptions = new BuildPlayerOptions {
           scenes = scenes,
@@ -110,8 +112,6 @@ namespace UnityBuilderAction
           subtarget = (int) buildSubtarget
 #endif
         };
-
-        buildTarget = (BuildTarget) Enum.Parse(typeof(BuildTarget), options["buildTarget"]);
       }
 
      // Apply Android settings
